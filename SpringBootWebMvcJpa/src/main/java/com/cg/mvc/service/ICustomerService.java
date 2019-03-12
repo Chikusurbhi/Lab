@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.cg.mvc.bean.Customer;
 
+
 public interface ICustomerService {
 
 	public Customer addCustomer(Customer customer);

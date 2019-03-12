@@ -11,5 +11,5 @@ public interface ICustomerRepository {
 	public Customer findCustomer(int customerid);
 	public Customer updateCustomer(Customer customer);
 	public List<Customer> getCustomerList();
-public Customer deleteCustomer(int custid);
+    public Customer deleteCustomer(int custid);
 }

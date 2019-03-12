@@ -8,6 +8,7 @@ import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 import com.cg.mvc.bean.Customer;
+import com.cg.mvc.exception.IdNotFindException;
 
 @Repository("repo")
 public class CustomerRepositoryImpl implements ICustomerRepository {
@@ -33,7 +34,7 @@ public class CustomerRepositoryImpl implements ICustomerRepository {
 		Customer customer= 
 				entityManager.find(Customer.class, customerid);
 		if(customer==null)
-			return null;
+			throw new IdNotFindException();
 			customer.setCustomerId(customerid);
 		return customer;
 	}

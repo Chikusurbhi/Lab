@@ -4,16 +4,21 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.mvc.bean.Customer;
 import com.cg.mvc.bean.Employee;
+import com.cg.mvc.exception.IdNotFindException;
+
 import com.cg.mvc.service.ICustomerService;
 
 @RestController
@@ -70,7 +75,7 @@ public class HelloController
 		return customer;
 	}
 	
-	@RequestMapping(value="/getCustomer/{custid}",produces="application/json",method=RequestMethod.POST)
+	@RequestMapping(value="/getCustomer/{custid}",produces="application/json",method=RequestMethod.POST) 
 	public Customer findCustomer(@PathVariable int custid)
 	{
 		Customer customer=service.findCustomer(custid);
@@ -79,7 +84,7 @@ public class HelloController
 	}
 	
 	@RequestMapping(value="/updateCustomer",consumes="application/json",method=RequestMethod.POST,produces="application/json")
-	public Customer updateCustomer(@RequestBody Customer customer)
+	public Customer updateCustomer(@RequestBody Customer customer) 
 	{
 		 customer=service.updateCustomer(customer);
 		return customer;
@@ -99,5 +104,12 @@ public class HelloController
 		List<Customer> list=service.getCustomerList();
 		return list;
 	}
-
+	
+	@ResponseStatus(value= HttpStatus.NOT_FOUND, reason="Id does not exists")
+	@ExceptionHandler({IdNotFindException.class})
+	public void handleotherException()
+	{
+		
+	}
+	
 }

@@ -2,6 +2,8 @@ package com.cg.mvc.service;
 
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,13 +28,15 @@ public class CustomerServiceImpl implements ICustomerService{
 	}
 	@Override
 	public Customer findCustomer(int customerid) {
+		
 		return repo.findCustomer(customerid);
 	}
 	@Override
 	public Customer updateCustomer(Customer customer) {
-		// TODO Auto-generated method stub
-		return repo.updateCustomer(customer);
+	   
+		   return repo.updateCustomer(customer);
 	}
+	
 	@Override
 	public List<Customer> getCustomerList() {
 		return repo.getCustomerList();
